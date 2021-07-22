@@ -1,0 +1,23 @@
+{% extends 'blog/base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <br>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card card-body">
+                <p>Are you sure you want to delete "<b>{{ item }}</b>"?</p>
+                <form action="{% url 'blog:deletepost' item.id %}" method="POST">
+
+                    {% csrf_token %}
+                    
+                    <a class="btn btn-warning" href="{% url 'blog:home' %}">Cancel</a>
+
+                    <button type="submit" class="btn btn-danger">Yes, i'm sure</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}

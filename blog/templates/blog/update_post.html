@@ -1,0 +1,22 @@
+{% extends 'blog/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% include 'blog/navbar.html' %}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card card-body">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% autoescape off %}
+                {{ form.as_p | safe }}
+                {% endautoescape %}
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

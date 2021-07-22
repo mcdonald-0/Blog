@@ -1,0 +1,40 @@
+{% load static %}
+
+<style>
+  #hello-message {
+    font-weight: 18px;
+    color: #fff;
+    margin-right: 10px;
+  }
+  #logout-url {
+    text-decoration: none;
+    color: #0d6efd;
+  }
+</style>
+
+ <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+
+            <div class="container">
+
+                  <span class="navbar-brand text-capitalize" id="hello-message">Hello, {{ user.username|default:'Guest' }}</span>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+                        <li class="nav-item"><a class="nav-link active" href="{% url 'blog:home' %}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'blog:uploadpost' %}">Upload</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'blog:viewmyprofile' %}">Profile</a></li>
+                        <li class="nav-item"><a class="nav-link " id="logout-url" aria-current="page" href="{% url 'registration:logout' %}">Logout</a></li>
+
+                    </ul>
+                </div>
+
+            </div>
+            
+        </nav>
+
+
+
+    

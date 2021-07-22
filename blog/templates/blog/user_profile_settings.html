@@ -1,0 +1,59 @@
+{% extends 'blog/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% include 'blog/navbar.html' %}
+	
+	<style>
+    .profile-pic {
+        max-width: 200px;
+        max-height: 200px;
+        margin: 0 auto;
+        border-radius: 100px;
+    }
+    #messages{
+        background-color: grey;
+        color: #fff;
+        padding: 10px;
+        margin-top: 10px;
+    }
+</style>
+
+<br>
+<div class="row">
+    <div class="col-md-3">
+        <div class="card card-body">
+            
+            <a href="{% url 'blog:viewmyprofile' %}" class="btn btn-warning">Back to profile</a>
+
+            <hr>
+            <h3 style="text-align: center;">Settings</h3>
+
+            <hr>
+            <a href="{{ request.user.userprofile.profile_picture.url }}"><img src="{{ request.user.userprofile.profile_picture.url }}" class="profile-pic"></a>
+
+        </div>
+    </div>
+
+    <div class="col-md-5">
+        <div class="card card-body">
+
+            {% for message in messages %}
+                <p id="messages" class="badge badge-secondary">{{ message }}</p>
+            {% endfor %}
+
+            <form action="" method="POST" enctype="multipart/form-data">
+				{% csrf_token %}
+				{{ form.as_p }}
+    	       <button class="btn btn-primary" type="submit">Save changes</button>
+	       </form>
+
+        </div>
+    </div>
+    <!-- Side widget-->
+    {% include 'blog/side_widgets.html' %}
+</div>
+
+{% endblock %}
