@@ -11,21 +11,42 @@ class DatePicker(forms.DateInput):
 
 class EditProfileForm(ModelForm):
 	first_name = forms.CharField(
-        widget=forms.TextInput(attrs={'placeholder': 'First name'})
+        widget=forms.TextInput(attrs={
+        	'placeholder': 'First name' , 
+        	'class': 'form-control',
+        	})
         )
 	middle_name = forms.CharField(
 		required=False,
-        widget=forms.TextInput(attrs={'placeholder': 'Middle name'})
+        widget=forms.TextInput(attrs={
+        	'placeholder': 'Middle name' , 
+        	'class': 'form-control',
+        	})
         )
 	last_name = forms.CharField(
-        widget=forms.TextInput(attrs={'placeholder': 'Last name'})
+        widget=forms.TextInput(attrs={
+        	'placeholder': 'Last name', 
+        	'class': 'form-control',
+        	})
         )
 	email = forms.EmailField(
-        widget=forms.EmailInput(attrs={'placeholder': 'Email'})
+        widget=forms.EmailInput(attrs={
+        	'placeholder': 'Email', 
+        	'class': 'form-control',
+        	})
         )
 	birthdate = forms.CharField(
-        widget=DatePicker()
+        widget=DatePicker(attrs={
+        	'class': 'form-control',
+        	})
         )
+	bio = forms.CharField(
+		widget=forms.Textarea(attrs={
+			'class': 'form-control', 
+			'rows': 3, 
+			'placeholder': 'Write a little about your self!'
+			})
+		)
 
 	GENDER_CHOICES = (
     		('M', 'Male'),

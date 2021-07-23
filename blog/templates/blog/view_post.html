@@ -57,7 +57,15 @@
                 </section>
             </article>
 
+            <form action="{% url 'blog:likepost' blog.pk %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" name="blog_id" value="{{ blog.id }}" class="btn btn-outline-success btn-sm badge text-body mb-3">Like</button>
+            </form>
+            <div>Icons made by <a href="https://www.flaticon.com/authors/becris" title="Becris">Becris</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+            <span class="small text-dark">{{ total_likes }} likes, {{ blog.comments.count }} comments</span>
+
             <!-- Comments section-->
+            {% if request.user.is_authenticated %}
             <section class="mb-5">
                 <div class="card bg-light">
                     <div class="card-body">
@@ -91,6 +99,9 @@
                     </div>
                 </div>
             </section>
+            {% else %}
+            <h4><a class="text-decoration-none text-reset" href="{% url 'registration:login' %}">Login</a> or <a class="text-decoration-none text-reset" href="{% url 'registration:signup' %}">Signup</a> to view more...</h4>
+            {% endif %}
          </div>
         {% include 'blog/side_widgets.html' %}
         

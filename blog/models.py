@@ -20,7 +20,7 @@ class UserProfile(models.Model):
     	)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, null=True)
 
-    profile_picture = models.ImageField(default='defaultimg.jpg', null=True)
+    profile_picture = models.ImageField(default='blog.jpg', null=True)
 
     bio = models.TextField(null=True, blank=True)
 
@@ -41,13 +41,16 @@ class BlogPost(models.Model):
     author = models.ForeignKey(UserProfile, null=True, on_delete=models.SET_NULL)
 
     title = models.CharField(max_length=200, null=True)
-    related_image = models.ImageField(default='defaultimg.jpg', upload_to="blog_images/", null=True)
+    related_image = models.ImageField(default='blog.jpg', upload_to="blog_images/", null=True)
     content = RichTextField()
-
+ 
     categories = models.ManyToManyField(Category)
     likes = models.ManyToManyField(UserProfile, related_name='likes', null=True, blank=True)
 
     date_added = models.DateTimeField(auto_now_add=True, null=True)
+
+    def total_likes(self):
+        return self.likes.count()
 
     def __str__(self):
         return "%s | %s " % (self.title, self.author)

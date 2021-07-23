@@ -19,25 +19,22 @@
         padding: 10px;
         margin-top: 10px;
     }
+    ul {
+        list-style-type: none;
+    }
 </style>
 
 <br>
 <div class="row">
     <div class="col-md-3">
-        <div class="card card-body">
-            
+        <div class="card card-body"> 
             <a href="{% url 'blog:viewmyprofile' %}" class="btn btn-warning">Back to profile</a>
-
             <hr>
             <h3 style="text-align: center;">Settings</h3>
-
-            <hr>
-            <a href="{{ request.user.userprofile.profile_picture.url }}"><img src="{{ request.user.userprofile.profile_picture.url }}" class="profile-pic"></a>
-
         </div>
     </div>
 
-    <div class="col-md-5">
+    <div class="col-md-6">
         <div class="card card-body">
 
             {% for message in messages %}
@@ -45,15 +42,49 @@
             {% endfor %}
 
             <form action="" method="POST" enctype="multipart/form-data">
+
 				{% csrf_token %}
-				{{ form.as_p }}
+
+				{{ form.first_name }}
+                <br>
+
+                {{ form.middle_name }}
+                <br>
+
+                {{ form.last_name }}
+                <br>
+
+                {{ form.email }}
+                <br>
+
+                {{ form.birthdate }}
+                <br>
+
+                {{ form.bio }}
+                <br>
+
+
     	       <button class="btn btn-primary" type="submit">Save changes</button>
 	       </form>
 
         </div>
     </div>
-    <!-- Side widget-->
-    {% include 'blog/side_widgets.html' %}
+
+    <div class="col-md-3">
+        <div class="card card-body">
+            <img src="{{ request.user.userprofile.profile_picture.url }}" alt="{{ request.user.userprofile }}'s picture" class="rounded-circle" width="200">
+            <hr>
+
+            <h6 class="text-center">Gender</h6>
+            {{ form.gender }}
+
+            <button class="btn btn-primary"><input type="file" name="profile_picture" accept="image/*" id="id_profile_picture">kChange Picture</button>
+
+        </div>
+    </div>
+
 </div>
+
+{% include 'blog/footer.html' %}
 
 {% endblock %}

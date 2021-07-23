@@ -16,7 +16,7 @@
 
             <div class="container">
 
-                  <span class="navbar-brand text-capitalize" id="hello-message">Hello, {{ user.username|default:'Guest' }}</span>
+                  <span class="navbar-brand text-capitalize" id="hello-message">Hello, {{ request.user.username|default:'Guest' }}</span>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
 

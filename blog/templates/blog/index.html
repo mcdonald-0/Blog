@@ -37,7 +37,7 @@
                     <!-- Featured blog post-->
                     <div class="card mb-4">
 
-                        <a href="{% url 'blog:viewpost' last_post.id %}"><img class="card-img-top" src="{% static 'images/kakashi.jpg' %}" alt="..." /></a>
+                        <a href="{% url 'blog:viewpost' last_post.id %}"><img class="card-img-top" src="{% static 'images/featured.png' %}" alt="..." /></a>
 
                         <div class="card-body">
 
@@ -127,9 +127,7 @@
             </div>
         </div>
         <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
-        </footer>
+        {% include 'blog/footer.html' %}
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->

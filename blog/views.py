@@ -57,18 +57,21 @@ def viewPost(request, pk):
 	if request.method == 'POST':
 		form = CommentForm(request.POST)
 		if form.is_valid():
-			if request.user.is_authenticated:
-				Comment.objects.create(post=blog, user=request.user.userprofile, **form.cleaned_data)
-			else:
-				messages.warning(request, 'You have to login to perform comment on a post!')
+			Comment.objects.create(post=blog, user=request.user.userprofile, **form.cleaned_data)
 			return redirect('blog:viewpost', pk=pk)
-		
+
 	context = {
 		'blog': blog,
 		'form': form,
+		'total_likes': blog.total_likes(),
 	}
 
 	return render(request, 'blog/view_post.html', context)
+
+def likePost(request, pk):
+	post = get_object_or_404(BlogPost, id=request.POST.get('blog_id'))
+	post.likes.add(request.user.userprofile)
+	return redirect('blog:viewpost', pk=pk)
 
 @unregistered_user
 @login_required(login_url='registration:login')
