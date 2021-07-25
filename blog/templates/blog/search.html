@@ -1,0 +1,37 @@
+{% extends 'blog/base.html' %}
+
+{% load static %}
+
+{% block content %}
+	<div class="card card-body">
+	    <div class="input-group">
+		  <input type="text" class="form-control" placeholder="Search">
+		  <div class="input-group-append">
+		    <button class="btn btn-success" type="submit">Go</button>
+		  </div>
+		</div>
+	</div>
+	<form method="GET">
+		{{ filter.form }}
+		<button type="submit" class="btn btn-primary">Search</button>
+	</form>
+
+<div class="card card-body">
+  <table class="table table-sm">
+    <tr>
+      <th>Author</th>
+      <th>Title</th>
+      <th>Content</th>
+    </tr>
+    {% for blog in blogs %}
+    <tr>
+      <td>{{ blog.author }}</td>
+      <td>{{ blog.title }}</td>
+      <td>{{ blog.content }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+
+	
+{% endblock %}

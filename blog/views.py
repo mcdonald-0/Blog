@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 
 from django.contrib.auth.decorators import login_required
 
@@ -7,7 +7,7 @@ from django.contrib import messages
 from .forms import *
 from .models import *
 from .decorators import *
-
+from .filters import *
 
 # Create your views here.
 
@@ -20,11 +20,14 @@ def homepage(request):
 	first_five = latest_ten_blogs[0:5]
 	second_five = latest_ten_blogs[5:10]
 
+	blog_filter = BlogPostFilter(request.GET, queryset=blogs)
+
 	context = {
 		'last_post': last_post,
 		'blogs': blogs,
 		'first_five': first_five,
 		'second_five': second_five,
+		'filter': blog_filter,
 	}
 
 	return render(request, 'blog/index.html', context)
@@ -68,6 +71,7 @@ def viewPost(request, pk):
 
 	return render(request, 'blog/view_post.html', context)
 
+@only_logged_in_users
 def likePost(request, pk):
 	post = get_object_or_404(BlogPost, id=request.POST.get('blog_id'))
 	post.likes.add(request.user.userprofile)
@@ -89,7 +93,8 @@ def updatePost(request, pk):
 			return redirect('blog:viewpost', pk=pk)
 
 	context = {
-		'form': form
+		'form': form,
+		'blog': blog
     }
 
 	return render(request, 'blog/update_post.html', context)
@@ -151,4 +156,27 @@ def editProfile(request):
 	}
 	return render(request, 'blog/user_profile_settings.html', context)
 
-# i need to edit the bug that prevents a user from changing their profile picture
+def search(request):
+	blogs = BlogPost.objects.all()
+	users = UserProfile.objects.all()
+
+	blog_filter = BlogPostFilter(request.GET, queryset=blogs)
+
+	blogs = blog_filter.qs
+
+	context = {
+		'filter': blog_filter,
+		'blogs': blogs,
+	}
+
+	return render(request, 'blog/search.html', context)
+
+def category(request, category):
+	category = Category.objects.get(name=category)
+	blog_related_by_category = get_list_or_404(BlogPost, category=category)
+
+	context = {
+		'blogs': blog_related_by_category,
+	}
+
+	return render(request, 'blog/categories.html', context)

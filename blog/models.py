@@ -44,8 +44,8 @@ class BlogPost(models.Model):
     related_image = models.ImageField(default='blog.jpg', upload_to="blog_images/", null=True)
     content = RichTextField()
  
-    categories = models.ManyToManyField(Category)
-    likes = models.ManyToManyField(UserProfile, related_name='likes', null=True, blank=True)
+    category = models.ForeignKey(Category, null=True, on_delete=models.CASCADE)
+    likes = models.ManyToManyField(UserProfile, related_name='likes', blank=True)
 
     date_added = models.DateTimeField(auto_now_add=True, null=True)
 

@@ -4,6 +4,7 @@ from django.forms import ModelForm, Textarea
 from ckeditor.fields import RichTextField
 
 from .models import *
+from .dates import *
 
 class DatePicker(forms.DateInput):
 	input_type = 'date'
@@ -35,11 +36,9 @@ class EditProfileForm(ModelForm):
         	'class': 'form-control',
         	})
         )
-	birthdate = forms.CharField(
-        widget=DatePicker(attrs={
-        	'class': 'form-control',
-        	})
-        )
+
+	birthdate = forms.DateField(widget=forms.SelectDateWidget(years=BIRTH_YEARS))
+
 	bio = forms.CharField(
 		widget=forms.Textarea(attrs={
 			'class': 'form-control', 
@@ -67,14 +66,23 @@ class EditProfileForm(ModelForm):
 class BlogPostForm(forms.ModelForm):
 	title = forms.CharField(
 		label="",
-        widget=forms.TextInput(attrs={'placeholder': 'Blog Title'})
+        widget=forms.TextInput(attrs={
+        	'placeholder': 'Blog Title', 
+        	'class': 'form-control'})
         )
-	content = RichTextField()
+	content = forms.CharField(
+		label="",
+		widget=forms.Textarea(attrs={
+			'class': 'form-control', 
+			'rows': 8, 
+			'placeholder': 'Your content goes here!'
+			})
+		)
 
 	class Meta:
 		model = BlogPost
 		fields = '__all__'
-		exclude = ['author', 'categories', 'likes']
+		exclude = ['author', 'likes']
 
 
 class CommentForm(forms.ModelForm):

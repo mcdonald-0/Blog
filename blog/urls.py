@@ -1,18 +1,23 @@
 from django.urls import path
-from . import views
+
+from .views import *
 
 app_name = 'blog'
 urlpatterns = [
-    path('', views.homepage, name='home'),
+    path('', homepage, name='home'),
 
-    path('upload/', views.uploadPost, name='uploadpost'),
+    path('search/', search, name='search'),
 
-    path('view/<str:pk>/', views.viewPost, name="viewpost"),
-    path('like/<str:pk>/', views.likePost, name="likepost"),
-    path('update/<str:pk>/', views.updatePost, name="updatepost"),
-    path('remove/<str:pk>/', views.deletePost, name="deletepost"),
+    path('upload/', uploadPost, name='uploadpost'),
 
-    path('profile/', views.viewMyProfile, name='viewmyprofile'),
-    path('profile/settings/', views.editProfile, name='editprofile'),
-    path('profile/view/<str:pk>/', views.viewOtherProfile, name='viewotherprofile'),
+    path('category/<str:category>/', category, name='category'),
+
+    path('view/<str:pk>/', viewPost, name="viewpost"),
+    path('like/<str:pk>/', likePost, name="likepost"),
+    path('update/<str:pk>/', updatePost, name="updatepost"),
+    path('remove/<str:pk>/', deletePost, name="deletepost"),
+
+    path('profile/', viewMyProfile, name='viewmyprofile'),
+    path('profile/settings/', editProfile, name='editprofile'),
+    path('profile/view/<str:pk>/', viewOtherProfile, name='viewotherprofile'),
 ]

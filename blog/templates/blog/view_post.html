@@ -38,8 +38,9 @@
                     <!-- Post meta content-->
                     <div class="text-muted fst-italic mb-2">Posted on {{  blog.date_added }} by {{ blog.author }}</div>
                     <!-- Post categories-->
-                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a>
-                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a>
+                    {% if blog.category != None %}
+                        <a class="badge bg-secondary text-decoration-none link-light" href="#!">{{ blog.category }}</a>
+                    {% endif %}
                 </header>
 
                 {% for message in messages %}
@@ -61,7 +62,7 @@
                 {% csrf_token %}
                 <button type="submit" name="blog_id" value="{{ blog.id }}" class="btn btn-outline-success btn-sm badge text-body mb-3">Like</button>
             </form>
-            <div>Icons made by <a href="https://www.flaticon.com/authors/becris" title="Becris">Becris</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+           
             <span class="small text-dark">{{ total_likes }} likes, {{ blog.comments.count }} comments</span>
 
             <!-- Comments section-->
@@ -98,15 +99,18 @@
                         </div>
                     </div>
                 </div>
+                {% if request.user.userprofile == blog.author %}
+                    <button class="btn btn-outline-warning mt-3"><a href="{% url 'blog:updatepost' blog.id %}" class="text-reset text-decoration-none">Update</a></button>
+                    <button class="btn btn-outline-danger mt-3"><a href="{% url 'blog:deletepost' blog.id %}" class="text-reset text-decoration-none">Delete</a></button>
+                {% endif %}
             </section>
             {% else %}
             <h4><a class="text-decoration-none text-reset" href="{% url 'registration:login' %}">Login</a> or <a class="text-decoration-none text-reset" href="{% url 'registration:signup' %}">Signup</a> to view more...</h4>
             {% endif %}
          </div>
         {% include 'blog/side_widgets.html' %}
-        
     </div>
 </div>
-
+{% include 'blog/footer.html' %}
 
 {% endblock %}

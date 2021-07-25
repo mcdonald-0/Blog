@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+
+{% load static %}
+
+{% block content %}
+	{% include 'blog/navbar.html' %}
+	
+		{% for blog in blogs %}
+		{{ blog.title }} -- {{ blog.author }}
+		{% endfor %}
+
+		
+
+{% endblock %}

@@ -41,9 +41,10 @@ INSTALLED_APPS = [
 
     'blog',
     'registration',
-    'ckeditor',
 
-    'djrichtextfield',
+
+    'ckeditor',
+    'django_filters',
 ]
 
 MIDDLEWARE = [

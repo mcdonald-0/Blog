@@ -7,14 +7,21 @@
 {% include 'blog/navbar.html' %}
 
 <div class="row">
-    <div class="col-md-6">
+     <div class="col-sm-3">
+        <div class="card card-body"> 
+            <a href="{% url 'blog:viewpost' blog.id %}" class="btn btn-warning">Back</a>
+            <hr>
+            <h3 style="text-align: center;">Update</h3>
+        </div>
+    </div>
+    <div class="col-sm-9">
         <div class="card card-body">
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {% autoescape off %}
                 {{ form.as_p | safe }}
                 {% endautoescape %}
-                <button type="submit">Submit</button>
+                <button  class="btn btn-primary" type="submit">Submit</button>
             </form>
         </div>
     </div>
