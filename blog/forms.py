@@ -70,6 +70,14 @@ class BlogPostForm(forms.ModelForm):
         	'placeholder': 'Blog Title', 
         	'class': 'form-control'})
         )
+	short_description = forms.CharField(
+		label="",
+		widget=forms.Textarea(attrs={
+			'class': 'form-control', 
+			'rows': 2, 
+			'placeholder': 'Write a short description about your post'
+			})
+		)
 	content = forms.CharField(
 		label="",
 		widget=forms.Textarea(attrs={

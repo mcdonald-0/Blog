@@ -44,24 +44,29 @@
             <form action="" method="POST" enctype="multipart/form-data">
 
 				{% csrf_token %}
-
+                <div class="my-3">
 				{{ form.first_name }}
-                <br>
+                </div>
 
+                <div class="my-3">
                 {{ form.middle_name }}
-                <br>
+                </div>
 
+                <div class="my-3">
                 {{ form.last_name }}
-                <br>
+                </div>
 
+                <div class="my-3">
                 {{ form.email }}
-                <br>
+                </div>
 
+                <div class="my-3">
                 {{ form.birthdate }}
-                <br>
+                </div>
 
+                <div class="my-3">
                 {{ form.bio }}
-                <br>
+                </div>
 
 	       <button class="btn btn-primary" type="submit">Save changes</button>
 

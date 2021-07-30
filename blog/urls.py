@@ -10,7 +10,8 @@ urlpatterns = [
 
     path('upload/', uploadPost, name='uploadpost'),
 
-    path('category/<str:category>/', category, name='category'),
+    path('category/', category, name='category'),
+    path('category/<str:category>/', categoryDetail, name='categorydetial'),
 
     path('view/<str:pk>/', viewPost, name="viewpost"),
     path('like/<str:pk>/', likePost, name="likepost"),

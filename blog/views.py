@@ -148,6 +148,12 @@ def editProfile(request):
 	if request.method == 'POST':
 		form = EditProfileForm(request.POST, request.FILES, instance=user)
 		if form.is_valid():
+			if form.cleaned_data['profile_picture'] == 'blog.jpg': 
+				if form.cleaned_data['profile_picture'] == 'blog.jpg' or 'female.png' or 'male.png':
+					if form.cleaned_data['gender'] == 'F':
+						request.user.userprofile.profile_picture = 'profile_images/female.png'
+					elif form.cleaned_data['gender'] == 'M':
+						request.user.userprofile.profile_picture = 'profile_images/male.png'
 			form.save()
 			return redirect('blog:viewmyprofile') 
 
@@ -171,12 +177,43 @@ def search(request):
 
 	return render(request, 'blog/search.html', context)
 
-def category(request, category):
+
+def category(request):
+	news = Category.objects.get(name='news')
+	sport = Category.objects.get(name='sport')
+	health = Category.objects.get(name='health')
+	fashion = Category.objects.get(name='fashion')
+	entertainment = Category.objects.get(name='entertainment')
+
+	news_posts = news.blogpost_set.all()
+	sport_posts = sport.blogpost_set.all()
+	health_posts = health.blogpost_set.all()
+	fashion_posts = fashion.blogpost_set.all()
+	entertainment_posts = entertainment.blogpost_set.all()
+
+	context = {
+		'news': news_posts,
+		'sports': sport_posts,
+		'health': health_posts,
+		'fashion': fashion_posts,
+		'entertainment': entertainment_posts,
+
+		'news_category': news,
+		'sports_category': sport,
+		'health_category': health,
+		'fashion_category': fashion,
+		'entertainment_category': entertainment,
+	}
+	return render(request, 'blog/categories.html', context)
+
+
+def categoryDetail(request, category):
 	category = Category.objects.get(name=category)
 	blog_related_by_category = get_list_or_404(BlogPost, category=category)
 
 	context = {
 		'blogs': blog_related_by_category,
+		'category': category,
 	}
 
-	return render(request, 'blog/categories.html', context)
+	return render(request, 'blog/category_detail.html', context)

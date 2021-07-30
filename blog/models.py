@@ -1,5 +1,6 @@
 from django.db import models
 
+from django.core.validators import MaxLengthValidator, MinLengthValidator
 from django.contrib.auth.models import User
 
 from ckeditor.fields import RichTextField
@@ -20,9 +21,9 @@ class UserProfile(models.Model):
     	)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, null=True)
 
-    profile_picture = models.ImageField(default='blog.jpg', null=True)
+    profile_picture = models.ImageField(default='profile_images/default.png', null=True, upload_to="profile_images/")
 
-    bio = models.TextField(null=True, blank=True)
+    bio = models.TextField(null=True, blank=True, validators=[MaxLengthValidator(150), MinLengthValidator(10)])
 
     date_joined = models.DateTimeField(auto_now_add=True, null=True)
 
@@ -41,10 +42,11 @@ class BlogPost(models.Model):
     author = models.ForeignKey(UserProfile, null=True, on_delete=models.SET_NULL)
 
     title = models.CharField(max_length=200, null=True)
+    short_description = models.TextField(null=True, validators=[MaxLengthValidator(200), MinLengthValidator(50)])
+
+    category = models.ForeignKey(Category, null=True, on_delete=models.CASCADE)
     related_image = models.ImageField(default='blog.jpg', upload_to="blog_images/", null=True)
     content = RichTextField()
- 
-    category = models.ForeignKey(Category, null=True, on_delete=models.CASCADE)
     likes = models.ManyToManyField(UserProfile, related_name='likes', blank=True)
 
     date_added = models.DateTimeField(auto_now_add=True, null=True)

@@ -27,7 +27,7 @@ def user_signup(request):
 
         if form.is_valid():
             user = form.save()
-
+            
             UserProfile.objects.create(user=user)
 
             user = form.cleaned_data.get('username')
@@ -59,4 +59,4 @@ def login_user(request):
 
 def logout_user(request):
     logout(request) 
-    return redirect('registration:login')
+    return redirect('blog:home')

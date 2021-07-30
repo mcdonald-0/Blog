@@ -39,7 +39,7 @@
                     <div class="text-muted fst-italic mb-2">Posted on {{  blog.date_added }} by {{ blog.author }}</div>
                     <!-- Post categories-->
                     {% if blog.category != None %}
-                        <a class="badge bg-secondary text-decoration-none link-light" href="#!">{{ blog.category }}</a>
+                        <a class="badge bg-secondary text-decoration-none link-light" href="{% url 'blog:categorydetial' blog.category %}">{{ blog.category }}</a>
                     {% endif %}
                 </header>
 
