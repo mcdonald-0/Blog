@@ -53,3 +53,12 @@ def only_logged_in_users(view_func):
 			return redirect('registration:login')
 
 	return wrapper
+
+def empty_search_error(view_func):
+	def wrapper(request, *args, **kwargs):
+
+		for item in request.GET:
+			if request.GET[item] != '':
+				pass
+
+	return wrapper

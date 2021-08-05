@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required
 
 from django.contrib import messages
 
+from django.db.models import Q
+
 from .forms import *
 from .models import *
 from .decorators import *
@@ -129,7 +131,7 @@ def viewMyProfile(request):
 	}
 	return render(request, 'blog/self_profile_view.html', context)
 
-
+@unregistered_user
 def viewOtherProfile(request, pk):
 	user = get_object_or_404(UserProfile, pk=pk)
 
@@ -148,8 +150,8 @@ def editProfile(request):
 	if request.method == 'POST':
 		form = EditProfileForm(request.POST, request.FILES, instance=user)
 		if form.is_valid():
-			if form.cleaned_data['profile_picture'] == 'blog.jpg': 
-				if form.cleaned_data['profile_picture'] == 'blog.jpg' or 'female.png' or 'male.png':
+			if form.cleaned_data['profile_picture'] == 'profile_images/default.png': 
+				if form.cleaned_data['profile_picture'] == 'profile_images/default.png' or 'profile_images/female.png' or 'profile_images/male.png':
 					if form.cleaned_data['gender'] == 'F':
 						request.user.userprofile.profile_picture = 'profile_images/female.png'
 					elif form.cleaned_data['gender'] == 'M':
@@ -163,19 +165,27 @@ def editProfile(request):
 	return render(request, 'blog/user_profile_settings.html', context)
 
 def search(request):
-	blogs = BlogPost.objects.all()
-	users = UserProfile.objects.all()
-
-	blog_filter = BlogPostFilter(request.GET, queryset=blogs)
-
-	blogs = blog_filter.qs
+	form = SearchForm()
 
 	context = {
-		'filter': blog_filter,
-		'blogs': blogs,
+		'form': form
 	}
 
 	return render(request, 'blog/search.html', context)
+
+def searchResults(request):
+	blogs = BlogPost.objects.all()
+	blog_filter = BlogPostFilter(request.GET, queryset=blogs)
+	blogs = blog_filter.qs
+
+	for item in request.GET:
+		if request.GET[item] == '':
+			print('sorry')
+
+	context = {
+		'blogs': blogs,
+	}
+	return render(request, 'blog/search_results.html', context)
 
 
 def category(request):

@@ -3,6 +3,11 @@
 {% load static %}
 {% load humanize %}
 
+{% block stylesheet %}
+    <link href="{% static 'css/footer.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+
 {% block content %}
 	{% include 'blog/navbar.html' %}
 
@@ -31,6 +36,6 @@
 	    {% endfor %}
 		</div>
 
-		
+{% include 'blog/footer.html' %}
 
 {% endblock %}

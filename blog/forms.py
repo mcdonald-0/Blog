@@ -63,7 +63,7 @@ class EditProfileForm(ModelForm):
 		exclude = ['user']
 
 
-class BlogPostForm(forms.ModelForm):
+class BlogPostForm(ModelForm):
 	title = forms.CharField(
 		label="",
         widget=forms.TextInput(attrs={
@@ -93,7 +93,7 @@ class BlogPostForm(forms.ModelForm):
 		exclude = ['author', 'likes']
 
 
-class CommentForm(forms.ModelForm):
+class CommentForm(ModelForm):
 	body = forms.CharField(
 		widget=forms.Textarea(attrs={
 			'class': 'form-control', 
@@ -106,4 +106,32 @@ class CommentForm(forms.ModelForm):
 		fields = ['body']
 
 	
-		
+class SearchForm(ModelForm):
+	author = forms.ModelChoiceField(
+		queryset=UserProfile.objects.all(),
+		label='',
+		required=False,
+		)
+	title = forms.CharField(
+		label="",
+		required=False,
+        widget=forms.TextInput(attrs={
+        	'placeholder': 'Title', 
+        	'class': 'form-control'})
+        )
+	short_description = forms.CharField(
+		label="",
+		required=False,
+        widget=forms.TextInput(attrs={
+        	'placeholder': 'Short description', 
+        	'class': 'form-control'})
+        )
+	category = forms.ModelChoiceField(
+		queryset=Category.objects.all(),
+		label='',
+		required=False,
+		)
+	class Meta:
+		model = BlogPost
+		fields = '__all__'
+		exclude = ['likes', 'related_image', 'date_added', 'content']

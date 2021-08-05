@@ -7,6 +7,7 @@ urlpatterns = [
     path('', homepage, name='home'),
 
     path('search/', search, name='search'),
+    path('search/result/', searchResults, name='searchresult'),
 
     path('upload/', uploadPost, name='uploadpost'),
 

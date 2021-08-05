@@ -1,0 +1,29 @@
+{% extends 'blog/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% if blogs %}
+<div class="card card-body">
+  <table class="table table-sm">
+    <tr>
+      <th>Author</th>
+      <th>Title</th>
+      <th>Content</th>
+    </tr>
+    {% for blog in blogs %}
+    <tr>
+      <td>{{ blog.author }}</td>
+      <td>{{ blog.title }}</td>
+      <td>{{ blog.content }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+
+{% else %}
+  <h1>Sorry</h1>
+{% endif %}
+
+{% endblock %}

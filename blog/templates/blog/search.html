@@ -2,36 +2,58 @@
 
 {% load static %}
 
+{% block stylesheet %}
+    <link href="{% static 'css/footer.css' %}" rel="stylesheet"/>
+{% endblock %}
+
 {% block content %}
-	<div class="card card-body">
-	    <div class="input-group">
-		  <input type="text" class="form-control" placeholder="Search">
-		  <div class="input-group-append">
-		    <button class="btn btn-success" type="submit">Go</button>
-		  </div>
-		</div>
-	</div>
-	<form method="GET">
-		{{ filter.form }}
-		<button type="submit" class="btn btn-primary">Search</button>
+
+{% include 'blog/navbar.html' %}
+<div class="my-3 mx-3">
+	<form method="GET" action="{% url 'blog:searchresult' %}">
+
+    <div class="row">
+      <div class="col-sm-2">
+        <div class="card card-body bg-dark">
+          <div class="d-flex flex-column align-items-center text-center">
+            {{ form.author }}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="card card-body bg-dark">
+          <div class="d-flex flex-column align-items-center text-center">
+            {{ form.title }}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="card card-body bg-dark">
+          <div class="d-flex flex-column align-items-center text-center">
+            {{ form.short_description }}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-2">
+        <div class="card card-body bg-dark">
+          <div class="d-flex flex-column align-items-center text-center">
+            {{ form.category }}
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="submit" class="btn btn-primary">Search</button>
+      </div>
+    </div>
+		
 	</form>
-
-<div class="card card-body">
-  <table class="table table-sm">
-    <tr>
-      <th>Author</th>
-      <th>Title</th>
-      <th>Content</th>
-    </tr>
-    {% for blog in blogs %}
-    <tr>
-      <td>{{ blog.author }}</td>
-      <td>{{ blog.title }}</td>
-      <td>{{ blog.content }}</td>
-    </tr>
-    {% endfor %}
-  </table>
 </div>
-
+{% include 'blog/footer.html' %}
 	
 {% endblock %}
+
+<!-- I need to download a search template and i need to put the footer below the page so it does'nt loook awkward! -->
