@@ -1,0 +1,21 @@
+{% extends 'blog/base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <br>
+
+    <div class=" text-center">
+        <p>Are you sure you want to delete <b>{{ item.title }}</b>?</p>
+        <form action="{% url 'blog:deletepost' item.id %}" method="POST">
+
+            {% csrf_token %}
+            
+            <a class="btn btn-warning" href="{% url 'blog:viewpost' item.id %}">Cancel</a>
+
+            <button type="submit" class="btn btn-danger">Yes, i'm sure</button>
+        </form>
+    </div>
+        
+    
+{% endblock %}

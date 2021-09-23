@@ -1,0 +1,59 @@
+{% extends 'blog/base.html' %}
+
+{% load static %}
+
+{% block stylesheet %}
+    <link href="{% static 'css/footer.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+{% block content %}
+
+{% include 'blog/navbar.html' %}
+<div class="my-3 mx-3">
+	<form method="GET" action="{% url 'blog:searchresult' %}">
+
+    <div class="row">
+      <div class="col-sm-2">
+        <div class="card card-body bg-dark">
+          <div class="d-flex flex-column align-items-center text-center">
+            {{ form.author }}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="card card-body bg-dark">
+          <div class="d-flex flex-column align-items-center text-center">
+            {{ form.title }}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="card card-body bg-dark">
+          <div class="d-flex flex-column align-items-center text-center">
+            {{ form.short_description }}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-2">
+        <div class="card card-body bg-dark">
+          <div class="d-flex flex-column align-items-center text-center">
+            {{ form.category }}
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="submit" class="btn btn-primary">Search</button>
+      </div>
+    </div>
+		
+	</form>
+</div>
+{% include 'blog/footer.html' %}
+	
+{% endblock %}
+
+<!-- I need to download a search template and i need to put the footer below the page so it does'nt loook awkward! -->

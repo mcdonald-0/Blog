@@ -1,0 +1,63 @@
+{% load static %}
+
+<style>
+  #hello-message {
+    font-weight: 18px;
+    color: #fff;
+    margin-right: 10px;
+  }
+  #logout-url {
+    text-decoration: none;
+    color: #6186d5;
+  }
+  #signup-url {
+    text-decoration: none;
+    color: #6186d5;
+  }
+  #navbar {
+    background-color: #141d2a
+  }
+  #url {
+    color: #6186d5;
+  }
+</style>
+
+ <nav id="navbar" class="navbar navbar-expand-sm ">
+
+            <div class="container">
+              {% if request.user.is_authenticated %}
+                  <span class="navbar-brand" id="hello-message"><a class="text-capitalize text-reset text-decoration-none" href="{% url 'blog:viewmyprofile' %}">Hello, {{ request.user.username }}</a></span>
+              {% else %}
+                <span id="hello-message" class="navbar-brand">Hello Guest</span>
+              {% endif %}
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+                      {% if request.user.is_authenticated %}
+
+                        <li class="nav-item"><a class="nav-link active" id="url" href="{% url 'blog:home' %}">Home</a></li>
+                         <li class="nav-item"><a class="nav-link" id="url" href="{% url 'blog:category' %}">Category</a></li>
+                        <li class="nav-item"><a class="nav-link" id="url" href="{% url 'blog:uploadpost' %}">Upload</a></li>
+                        <li class="nav-item"><a class="nav-link" id="logout-url" aria-current="page" href="{% url 'registration:logout' %}">Logout</a></li>
+
+                        {% else %}
+                        
+                        <li class="nav-item"><a class="nav-link active" id="url" href="{% url 'blog:home' %}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link active" id="url" href="{% url 'blog:category' %}">Categories</a></li>
+                        <li class="nav-item"><a class="nav-link active" id="url" href="{% url 'registration:login' %}">Login</a></li>
+                        <li class="nav-item"><a class="nav-link active" id="signup-url" href="{% url 'registration:signup' %}">Signup</a></li>
+
+                      {% endif %}
+                    </ul>
+                </div>
+
+            </div>
+            
+        </nav>
+
+
+
+    

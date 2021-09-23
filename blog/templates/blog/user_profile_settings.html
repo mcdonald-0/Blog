@@ -1,0 +1,100 @@
+{% extends 'blog/base.html' %}
+
+{% load static %}
+
+{% block stylesheet %}
+    <link href="{% static 'css/footer.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+
+{% block content %}
+
+{% include 'blog/navbar.html' %}
+	
+	<style>
+    .profile-pic {
+        max-width: 200px;
+        max-height: 200px;
+        margin: 0 auto;
+        border-radius: 100px;
+    }
+    #messages{
+        background-color: grey;
+        color: #fff;
+        padding: 10px;
+        margin-top: 10px;
+    }
+    ul {
+        list-style-type: none;
+    }
+</style>
+
+<br>
+<div class="row">
+    <div class="col-md-3">
+        <div class="card card-body"> 
+            <a href="{% url 'blog:viewmyprofile' %}" class="btn btn-warning">Back to profile</a>
+            <hr>
+            <h3 style="text-align: center;">Settings</h3>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card card-body">
+
+            {% for message in messages %}
+                <p id="messages" class="badge badge-secondary">{{ message }}</p>
+            {% endfor %}
+
+            <form action="" method="POST" enctype="multipart/form-data">
+
+				{% csrf_token %}
+                <div class="my-3">
+				{{ form.first_name }}
+                </div>
+
+                <div class="my-3">
+                {{ form.middle_name }}
+                </div>
+
+                <div class="my-3">
+                {{ form.last_name }}
+                </div>
+
+                <div class="my-3">
+                {{ form.email }}
+                </div>
+
+                <div class="my-3">
+                {{ form.birthdate }}
+                </div>
+
+                <div class="my-3">
+                {{ form.bio }}
+                </div>
+
+	       <button class="btn btn-primary" type="submit">Save changes</button>
+
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card card-body">
+            <img src="{{ request.user.userprofile.profile_picture.url }}" alt="{{ request.user.userprofile }}'s picture" class="rounded-circle" width="200">
+            <hr>
+
+            <h6 class="text-center">Gender</h6>
+            {{ form.gender }}
+
+            <button class="btn btn-primary"><input type="file" name="profile_picture" accept="image/*" id="id_profile_picture">Change Picture</button>
+            
+            </form>
+        </div>
+    </div>
+                  
+
+</div>
+
+{% include 'blog/footer.html' %}
+
+{% endblock %}

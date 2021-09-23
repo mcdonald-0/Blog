@@ -1,0 +1,118 @@
+{% extends 'blog/base.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block stylesheet %}
+    <link href="{% static 'css/footer.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+
+{% block content %}
+
+{% include 'blog/navbar.html' %}
+	<style>
+    .profile-pic {
+        max-width: 200px;
+        max-height: 200px;
+        margin: 0 auto;
+        border-radius: 100px;
+    }
+    ul {
+        list-style-type: none;
+    }
+</style>
+
+<div class="mx-2 my-3">
+  <div class="row gutters-sm">
+
+		<div class="col-md-3">
+			<div class="card card-body"> 
+	        <h3 class="text-center">Total Posts</h3>
+	        <hr>
+	        <h4 class="text-center"> {{ user.blogpost_set.all.count }} </h4>
+	       	<br>
+	        <h3 class="text-center">Date Joined</h3>
+	        <hr>
+	        <h5 class="text-center text-muted text-capitalize">{{ user.date_joined | naturalday }}</h4>
+			</div>
+		</div>
+
+		<div class="col-md-4">
+			<div class="card card-body">
+    			<div class="d-flex flex-column align-items-center text-center">
+            		<img src="{{ user.profile_picture.url }}" alt="{{ user }} photo" class="rounded-circle" width="150">
+            		<div class="mt-3">
+                		<h4 class="text-capitalize">{{ user }}</h4>
+		                <p class="text-secondary mb-1 text-break">{{ user.bio }}</p>
+		                <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+		                <button class="btn btn-primary">Follow</button>
+		                <button class="btn btn-outline-primary">Message</button>
+            		</div>
+          		</div>
+        	</div>
+    	</div>
+
+    	<div class="col-md-5">
+    		<div class="card mb-3">
+    			<div class="card-body">
+
+        			<div class="row">
+            			<div class="col-sm-3">
+            				<h6 class="mb-0">Full Name</h6>
+            			</div>
+            			<div class="col-sm-9 text-secondary text-capitalize">{{ user }}</div>
+        			</div>
+
+        			<hr>
+
+        			<div class="row">
+            			<div class="col-sm-3">
+            				<h6 class="mb-0">Email</h6>
+            			</div>
+            			<div class="col-sm-9 text-secondary">{{ user.email }}</div>
+        			</div>
+
+        			<hr>
+
+        			<div class="row">
+            			<div class="col-sm-3">
+            				<h6 class="mb-0">Birthdate</h6>
+            			</div>
+            			<div class="col-sm-9 text-secondary">{{ user.birthdate }}</div>
+        			</div>
+
+          			<hr>
+
+          			<div class="row">
+            			<div class="col-sm-3">
+              				<h6 class="mb-0">Gender</h6>
+            			</div>
+            			<div class="col-sm-9 text-secondary">{{ user.gender }}</div>
+          			</div>
+
+          			<hr>
+
+          			<div class="row">
+            			<div class="col-sm-3">
+              				<h6 class="mb-0">Address</h6>
+            			</div>
+            			<div class="col-sm-9 text-secondary">Bay Area, San Francisco, CA</div>
+          			</div>
+
+          		</div>
+          	</div>
+        </div>
+
+	</div>
+</div>
+        
+    <!-- footer-->
+    {% include 'blog/footer.html' %}
+                  
+
+
+
+{% include 'blog/footer.html' %}
+
+{% endblock %}

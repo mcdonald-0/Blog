@@ -1,0 +1,151 @@
+{% extends 'blog/base.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block stylesheet %}
+    <link href="{% static 'css/footer.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+
+{% block content %}
+	{% include 'blog/navbar.html' %}
+
+	{% if news %}
+		<h2 class="text-center font-weight-bold my-1"><a class="text-reset text-decoration-none" href="{% url 'blog:categorydetial' news_category %}">News</a></h2>
+		<div class="row mx-3 my-2">
+		{% for blog in news %}
+			<div class="col-sm-4">
+				<div class="card mb-4">
+			        <a href="{% url 'blog:viewpost' blog.id %}"><img class="card-img-top" src="{{ blog.related_image.url }}" alt="{{ blog.title }} photo" /></a>
+			        
+			        <div class="card-body">
+
+			            <div class="small text-muted">{{ blog.date_added | naturaltime | naturalday }}</div>
+
+			            <h2 class="card-title h4">{{ blog.title }}</h2>
+
+			            {% autoescape off %}
+			            <p class="card-text">{{ blog.short_description }}</p>
+			            {% endautoescape %}
+
+			            <a class="btn btn-primary" style="text-decoration: none;" href="{% url 'blog:viewpost' blog.id %}">Read more →</a>
+
+			        </div>
+			    </div>
+			</div>
+	    {% endfor %}
+		</div>
+	{% endif %}
+
+	{% if sports %}
+		<h2 class="text-center font-weight-bold my-1"><a class="text-reset text-decoration-none" href="{% url 'blog:categorydetial' sports_category %}">Sport</a></h2>
+		<div class="row mx-3 my-2">
+		{% for blog in sports %}
+			<div class="col-sm-4">
+				<div class="card mb-4">
+			        <a href="{% url 'blog:viewpost' blog.id %}"><img class="card-img-top" src="{{ blog.related_image.url }}" alt="{{ blog.title }} photo" /></a>
+			        
+			        <div class="card-body">
+
+			            <div class="small text-muted">{{ blog.date_added | naturaltime | naturalday }}</div>
+
+			            <h2 class="card-title h4">{{ blog.title }}</h2>
+
+			            {% autoescape off %}
+			            <p class="card-text">{{ blog.short_description }}</p>
+			            {% endautoescape %}
+
+			            <a class="btn btn-primary" style="text-decoration: none;" href="{% url 'blog:viewpost' blog.id %}">Read more →</a>
+
+			        </div>
+			    </div>
+			</div>
+	    {% endfor %}
+		</div>
+	{% endif %}
+
+	{% if health %}
+		<h2 class="text-center font-weight-bold my-1"><a class="text-reset text-decoration-none" href="{% url 'blog:categorydetial' health_category %}">Health</a></h2>
+		<div class="row mx-3 my-2">
+		{% for blog in health %}
+			<div class="col-sm-4">
+				<div class="card mb-4">
+			        <a href="{% url 'blog:viewpost' blog.id %}"><img class="card-img-top" src="{{ blog.related_image.url }}" alt="{{ blog.title }} photo" /></a>
+			        
+			        <div class="card-body">
+
+			            <div class="small text-muted">{{ blog.date_added | naturaltime | naturalday }}</div>
+
+			            <h2 class="card-title h4">{{ blog.title }}</h2>
+
+			            {% autoescape off %}
+			            <p class="card-text">{{ blog.short_description }}</p>
+			            {% endautoescape %}
+
+			            <a class="btn btn-primary" style="text-decoration: none;" href="{% url 'blog:viewpost' blog.id %}">Read more →</a>
+
+			        </div>
+			    </div>
+			</div>
+	    {% endfor %}
+		</div>
+	{% endif %}
+
+	{% if fashion %}
+		<h2 class="text-center font-weight-bold my-1"><a class="text-reset text-decoration-none" href="{% url 'blog:categorydetial' fashion_category %}">Fashion</a></h2>
+		<div class="row mx-3 my-2">
+		{% for blog in fashion %}
+			<div class="col-sm-4">
+				<div class="card mb-4">
+			        <a href="{% url 'blog:viewpost' blog.id %}"><img class="card-img-top" src="{{ blog.related_image.url }}" alt="{{ blog.title }} photo" /></a>
+			        
+			        <div class="card-body">
+
+			            <div class="small text-muted">{{ blog.date_added | naturaltime | naturalday }}</div>
+
+			            <h2 class="card-title h4">{{ blog.title }}</h2>
+
+			            {% autoescape off %}
+			            <p class="card-text">{{ blog.short_description }}</p>
+			            {% endautoescape %}
+
+			            <a class="btn btn-primary" style="text-decoration: none;" href="{% url 'blog:viewpost' blog.id %}">Read more →</a>
+
+			        </div>
+			    </div>
+			</div>
+	    {% endfor %}
+		</div>
+	{% endif %}
+
+	{% if entertainment %}
+		<h2 class="text-center font-weight-bold my-1"><a class="text-reset text-decoration-none" href="{% url 'blog:categorydetial' entertainment_category %}">Entertainment</a></h2>
+		<div class="row mx-3 my-2">
+		{% for blog in entertainment %}
+			<div class="col-sm-4">
+				<div class="card mb-4">
+			        <a href="{% url 'blog:viewpost' blog.id %}"><img class="card-img-top" src="{{ blog.related_image.url }}" alt="{{ blog.title }} photo" /></a>
+			        
+			        <div class="card-body">
+
+			            <div class="small text-muted">{{ blog.date_added | naturaltime | naturalday }}</div>
+
+			            <h2 class="card-title h4">{{ blog.title }}</h2>
+
+			            {% autoescape off %}
+			            <p class="card-text">{{ blog.short_description }}</p>
+			            {% endautoescape %}
+
+			            <a class="btn btn-primary" style="text-decoration: none;" href="{% url 'blog:viewpost' blog.id %}">Read more →</a>
+
+			        </div>
+			    </div>
+			</div>
+	    {% endfor %}
+		</div>
+	{% endif %}
+
+{% include 'blog/footer.html' %}
+   
+{% endblock %}
