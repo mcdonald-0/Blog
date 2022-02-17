@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm, Textarea
 
-from ckeditor.fields import RichTextField
+# from ckeditor.fields import RichTextField
 
 from .models import *
 from .dates import *

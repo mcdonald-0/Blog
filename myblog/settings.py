@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'registration',
 
 
-    'ckeditor',
+    # 'ckeditor',
     'django_filters',
 ]
 

@@ -3,7 +3,7 @@ from django.db import models
 from django.core.validators import MaxLengthValidator, MinLengthValidator
 from django.contrib.auth.models import User
 
-from ckeditor.fields import RichTextField
+# from ckeditor.fields import RichTextField
 
 
 class UserProfile(models.Model):
@@ -42,11 +42,11 @@ class BlogPost(models.Model):
     author = models.ForeignKey(UserProfile, null=True, on_delete=models.SET_NULL)
 
     title = models.CharField(max_length=200, null=True)
-    short_description = models.TextField(null=True, validators=[MaxLengthValidator(200), MinLengthValidator(50)])
+    short_description = models.TextField(null=True, validators=[MaxLengthValidator(200), MinLengthValidator(30)])
 
     category = models.ForeignKey(Category, null=True, on_delete=models.CASCADE)
     related_image = models.ImageField(default='blog.jpg', upload_to="blog_images/", null=True)
-    content = RichTextField()
+    content = models.TextField()
     likes = models.ManyToManyField(UserProfile, related_name='likes', blank=True)
 
     date_added = models.DateTimeField(auto_now_add=True, null=True)
@@ -61,7 +61,7 @@ class Comment(models.Model):
     user = models.ForeignKey(UserProfile, null=True, on_delete=models.CASCADE)
 
     post = models.ForeignKey(BlogPost, null=True, related_name="comments", on_delete=models.CASCADE)
-    body = RichTextField()
+    body = models.TextField()
 
     date_added = models.DateTimeField(auto_now_add=True)
 

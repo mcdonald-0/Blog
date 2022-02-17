@@ -47,7 +47,7 @@ def uploadPost(request):
 		form = BlogPostForm(request.POST, request.FILES)
 		if form.is_valid():
 			BlogPost.objects.create(author=author, **form.cleaned_data)
-			return redirect('blog:home')
+			return redirect('blog:view')
 			
 	context = {
 		'form': form

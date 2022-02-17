@@ -2,7 +2,6 @@
 
 from django.db import migrations, models
 import django.db.models.deletion
-import djrichtextfield.models
 
 
 class Migration(migrations.Migration):
@@ -16,7 +15,7 @@ class Migration(migrations.Migration):
             name='BlogPost',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('content', djrichtextfield.models.RichTextField()),
+                ('content', models.TextField()),
                 ('author', models.OneToOneField(null=True, on_delete=django.db.models.deletion.SET_NULL, to='blog.userprofile')),
             ],
         ),
